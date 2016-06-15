@@ -1,1 +1,1 @@
-This exercice is not finishe yet
+falta corregir la entrada
