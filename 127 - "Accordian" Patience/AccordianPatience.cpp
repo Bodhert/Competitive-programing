@@ -7,7 +7,7 @@ int main()
 {
   string card;
 
-  while (cin >> card && card != "#") // corregir entrada
+  while (cin >> card && card != "#") 
   {
     game.assign(MAXN,stack<string>());
     game[0].push(card);
