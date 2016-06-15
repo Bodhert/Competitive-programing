@@ -7,7 +7,7 @@ int main()
 {
   string card;
 
-  while (cin >> card && card != "#") 
+  while (cin >> card && card != "#")
   {
     game.assign(MAXN,stack<string>());
     game[0].push(card);
@@ -21,7 +21,7 @@ int main()
     char suit;
     string actC;
     int i = 0;
-    while(i < game.size()) // problema en el ciclo
+    while(i < game.size())
     {
       actC = " ";
       ran  = ' ';
@@ -76,13 +76,7 @@ int main()
       if(!move) i++;
     }
 
-    int cont =0;
-    for(int j = 0; j < game.size(); ++j)
-    {
-      if(!game[j].empty()) cont++;
-    }
-
-    cout << cont << " piles remaining: ";
+    cout << game.size() << " piles remaining: ";
     for(int j = 0; j < game.size();++j)
     {
       if(!game[j].empty() && j != game.size()-1)
