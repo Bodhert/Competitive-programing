@@ -46,7 +46,7 @@ void clean1()
 
 void dfs2(int u, int x)  //desconectar x sin borrarlo
 {
-  visited[u] = 1; // se estan visitando aunque estan desconectados de 0?
+  visited[u] = 1;
 
   for(int i = 0; i < adj[u].size(); ++i)
   {
@@ -74,7 +74,7 @@ int main()
   {
     clean1();
     cin >> n;
-    for(int i = 0; i < n; ++i)  // estoy guardando asi como asi, estoy guardando mal
+    for(int i = 0; i < n; ++i)
     {
       for(int j = 0; j < n; ++j)
       {
@@ -116,7 +116,6 @@ int main()
         dfs2(0,i);
         for(int j = 0; j < n; ++j)
         {
-          // a si mismo
           if(j == 0 || visited[j] == 1 || visited[j] == -1) cout << "|N";
           // a si mismo
           else if(visited[j] == 0 || j == i) cout << "|Y";
@@ -132,19 +131,6 @@ int main()
         }
         cout << "|" << endl;
       }
-      // printVisited(n);
-      // for(int j = 0; j < n; ++j) // aca esta el error en la j == 0
-      // {
-        // if(j == 0 || visited[j] == -1 ) cout << "|N";
-        // else if(j == i && visited[j] != -1) cout << "|Y";
-        // else if() cout << "|N";
-        // if(visited[j] == 0 || visited[j] == -1 || j == 0) cout << "|N";
-        // else cout << "|Y";
-      // }
-
-      // cout << "|" << endl;
-      // cout << "Nodo: " << i << " estado visitado " << endl;
-      // printVisited(n);
     }
 
     cout << separator << endl;
