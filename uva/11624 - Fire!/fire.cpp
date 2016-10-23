@@ -11,6 +11,13 @@ char matJ[MAXN][MAXN];
 int memF[MAXN][MAXN];
 int memJ[MAXN][MAXN];
 
+// mejorar las preguntas con los arreglos de -1,1,0....
+
+
+// pueden haber fires desde diferentes  puntos, lanzarlo desde estos puntos
+// diferentes
+
+
 
 
 void clear(){
