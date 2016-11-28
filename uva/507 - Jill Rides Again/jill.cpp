@@ -26,15 +26,19 @@ int main(){
       ans = max(ans,sum);
       actualSum[i] = sum;
       if(sum < 0) sum = 0;
-      else if(sum == ans) index = i+1;
+      else if(sum == ans) index = i;
     }
+    
     //ingeniarmelas para sacar el minimo  y el maximo actual de path y desps su correspondientes posiciones
-
+    //    cout << ans << endl;
     if(ans == 0) cout << "Route " << route++ << " has no nice parts" << endl;
     else{
-      //hacer un for y le sumo el path a ans y la suma que me de mas alto es otro indice,
-      
-      cout << "The nicest part of route " << route++ << " is between stops " << "?" << " and " << index << endl;
+      int index2;
+      for(int i = index; i > 0 && actualSum[i] > 0; i--){
+	index2 = i;
+      }
+      //hacer un for y le sumo el path a ans y la suma que me de mas alto es otro indice ,
+      cout << "The nicest part of route " << route++ << " is between stops " << index2 << " and " << index+1 << endl;
     }
     
     
