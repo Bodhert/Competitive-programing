@@ -1,7 +1,10 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <limits>
 using namespace std;
+const int minimo = numeric_limits<int>::max();
+const int maximo = numeric_limits<int>::max() * -1;
 
 int main(){
   int cases,route = 1,stops,nicennes;
@@ -33,12 +36,36 @@ int main(){
     //    cout << ans << endl;
     if(ans == 0) cout << "Route " << route++ << " has no nice parts" << endl;
     else{
-      int index2;
-      for(int i = index; i > 0 && actualSum[i] > 0; i--){
-	index2 = i;
+
+      //cout << "imprimiendo la sumas actuales: " << endl;
+      //cout << minimo << " " << maximo << endl;
+      //el problema esta en los desempates, creo que lo puedo hacer linean dentro de kadanes
+      // for(int i = 0; i < actualSum.size(); ++i){
+      // 	cout << actualSum[i] << " ";
+      // }
+
+      //cout << endl;
+      
+      int index2,index3 , dif = maximo ;
+      for(int i = 1; i <= actualSum.size(); ++i){
+	if(actualSum[i] == ans){
+	  int tempIndex2 = i, tempIndex3;
+   
+	  for(int j = i; j >= 1 && actualSum[j] >= 0; j--){
+	    tempIndex3 = j;
+	  }
+
+	  if(tempIndex2 - tempIndex3 > dif){
+	    dif = tempIndex2 -tempIndex3;
+	    index2 = tempIndex2;
+	    index3 = tempIndex3;
+	  }
+	  
+	}
       }
+      
       //hacer un for y le sumo el path a ans y la suma que me de mas alto es otro indice ,
-      cout << "The nicest part of route " << route++ << " is between stops " << index2 << " and " << index+1 << endl;
+      cout << "The nicest part of route " << route++ << " is between stops " << index3 << " and " << index2+1 << endl;
     }
     
     
