@@ -28,5 +28,5 @@
 *.out
 *.app
 
-# Emacs backup files
-*.~
+# Ignore all emacs backup files
+*~
