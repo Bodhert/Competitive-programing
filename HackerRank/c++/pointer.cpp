@@ -5,9 +5,9 @@
 using namespace std;
 
 void update(int *a,int *b) {
-  int tempa = *a, tempb = *b;
-  *a = tempa + tempb;
-  *b = abs(tempa - tempb);
+  int tempa = *a;
+  *a = tempa + *b;
+  *b = abs(tempa - *b);
 }
 
 int main() {
