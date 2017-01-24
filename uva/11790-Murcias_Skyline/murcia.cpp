@@ -11,9 +11,23 @@ int LIS(vector<int>& h, vector<int>& w ){
     L[pos] = h[i];
     L_id[pos] = i;
     P[i] = pos ? L_id[pos - 1] : -1;
-    if(pos + 1 >= lis){ 
+    if(pos + 1 > lis){ 
       lis = pos + 1;
       lis_end = i;
+    }else if(pos + 1 == lis){
+      
+       int x = lis_end, sum = 0;
+       for(;P[x] >= 0; x = P[x]) sum += w[x];
+       sum += w[x];
+       
+       int x1 = i, sum1 = 0;
+       for(;P[x1] >= 0; x1 = P[x1]) sum1 += w[x1];
+       sum1 += w[x1];
+
+       if(sum1 > sum){
+	 lis = pos + 1;
+	 lis_end = i;
+       }
     }
   }
 
@@ -26,7 +40,7 @@ int LIS(vector<int>& h, vector<int>& w ){
   
 }
 
-int LDS(vector<int>& h, vector<int>& w){ 
+int LDS(vector<int>& h, vector<int>& w){  // este metodo esta mal formulado 
   int size = h.size();
   int L[size], L_id[size], P[size];
 
@@ -37,10 +51,24 @@ int LDS(vector<int>& h, vector<int>& w){
     L[pos] = h[i]; 
     L_id[pos] = i; 
     P[i] = pos ? L_id[pos - 1] : -1;
-    if(pos + 1 >= lis){ 
+    if(pos + 1 > lis){ 
       lis = pos + 1;
       lis_end = i;
+    }else if( pos + 1 == lis){
+       // int x = lis_end, sum = 0;
+       // for(;P[x] >= 0; x = P[x]) sum += w[x];
+       // sum += w[x];
+       
+       // int x1 = i, sum1 = 0;
+       // for(;P[x1] >= 0; x1 = P[x1]) sum1 += w[x1];
+       // sum1 += w[x1];
+
+       // if(sum1 > sum){
+       // 	 lis = pos + 1;
+       // 	 lis_end = i;
+       // }
     }
+    
   }
 
   int x = lis_end, sum = 0;
@@ -88,8 +116,9 @@ int main(){
 }
 
 
-//revisar el ultimo caso
 /*
-  aparentemente ya me esta sacando los lds y lis correspondiente, lo que debo de tener en cuenta
-  es el criterio de desempate, en este caso es el peso o la suma del ancho de los edificios
- */
+  ya logre el criterio de desempate con lis, el que me esta presentando problemas
+  es lds;
+  con los casos del udebug , el lis me lo esta generando correctamente, el lds no
+
+  */
