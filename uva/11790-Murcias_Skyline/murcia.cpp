@@ -47,11 +47,11 @@ int LDS(vector<int>& h, vector<int>& w){  // este metodo esta mal formulado
   int lis = 0, lis_end = 0;
   for(int i = 0; i < size; ++i){
     int temp = upper_bound(L, L + lis, h[i]) - L; 
-    int pos = temp ? temp - 1: lis; 
+    int pos = temp ? temp - 1: lis; // es posible que este sea el problema
     L[pos] = h[i]; 
     L_id[pos] = i; 
-    P[i] = pos ? L_id[pos - 1] : -1;
-    if(pos + 1 > lis){ 
+    P[i] = pos ? L_id[pos - 1] : -1; // es posible que el problema este on pos
+    if(pos + 1 > lis){ //se aumenta el tamaño de la lista y no se porque
       lis = pos + 1;
       lis_end = i;
     }else if( pos + 1 == lis){
@@ -121,4 +121,6 @@ int main(){
   es lds;
   con los casos del udebug , el lis me lo esta generando correctamente, el lds no
 
+
+el erro esta el lds, y lo que pasa es que cuando el elemento mayor esta en la pos 0 me lo tira al final de la lista
   */
