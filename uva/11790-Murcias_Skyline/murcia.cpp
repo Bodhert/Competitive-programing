@@ -42,41 +42,43 @@ int LIS(vector<int>& h, vector<int>& w ){
 
 int LDS(vector<int>& h, vector<int>& w){  // este metodo esta mal formulado 
   int size = h.size();
-  int L[size], L_id[size], P[size];
-
-  int lis = 0, lis_end = 0;
-  for(int i = 0; i < size; ++i){
-    int temp = upper_bound(L, L + lis, h[i]) - L; 
-    int pos = temp ? temp - 1: lis; // es posible que este sea el problema
-    L[pos] = h[i]; 
-    L_id[pos] = i; 
-    P[i] = pos ? L_id[pos - 1] : -1; // es posible que el problema este on pos
-    if(pos + 1 > lis){ //se aumenta el tamaño de la lista y no se porque
-      lis = pos + 1;
-      lis_end = i;
-    }else if( pos + 1 == lis){
-       // int x = lis_end, sum = 0;
-       // for(;P[x] >= 0; x = P[x]) sum += w[x];
-       // sum += w[x];
-       
-       // int x1 = i, sum1 = 0;
-       // for(;P[x1] >= 0; x1 = P[x1]) sum1 += w[x1];
-       // sum1 += w[x1];
-
-       // if(sum1 > sum){
-       // 	 lis = pos + 1;
-       // 	 lis_end = i;
-       // }
+  int max = -1, total = 0;
+  int temp[size] = {0};
+  int P[size], L[size];
+  temp[0] = 1;
+  P[0] = -1;
+  for(int i = 1; i < size; ++i){
+    max = 0;
+    temp[i] = 0;
+    P[i] = -1;
+    for(int j = 0; j < i; ++j){
+      if(h[j] > h[i] && temp[j] > max){
+	max = temp[j];
+	P[i]=j;
+      }
     }
-    
+    temp[i] = max + 1;
+    if(temp[i] > total){
+      total = temp[i];
+      //hago la suma;
+    }else if(temp[i] == total){
+      // aca biene el criterio de desempate
+      // mantengo el maximo entre la suma actual y la que me dio igual
+    }
   }
 
-  int x = lis_end, sum = 0;
-  for(;P[x] >= 0; x = P[x]) sum += w[x];
-  sum += w[x];
-  
+  int sum = 0;
+  for(int i = size; i >= 0;){
+    if(temp[i] == total){
+      //L[total] = h[i];
+      sum += w[i];
+      i = P[i];
+      total--;
+    }else
+      i--;
+  }
+
   return sum;
-  
 }
 
 int main(){
