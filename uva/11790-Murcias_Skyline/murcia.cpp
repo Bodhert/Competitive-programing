@@ -42,7 +42,7 @@ int LIS(vector<int>& h, vector<int>& w ){
 
 int LDS(vector<int>& h, vector<int>& w){  // este metodo esta mal formulado 
   int size = h.size();
-  int max = -1, total = 0;
+  int max = -1, total = 0, last = 0;
   int temp[size] = {0};
   int P[size], L[size];
   temp[0] = 1;
@@ -51,33 +51,40 @@ int LDS(vector<int>& h, vector<int>& w){  // este metodo esta mal formulado
     max = 0;
     temp[i] = 0;
     P[i] = -1;
+    int pos = 0;
     for(int j = 0; j < i; ++j){
-      if(h[j] > h[i] && temp[j] > max){
+      if(h[j] > h[i] && temp[j] > max){	
 	max = temp[j];
 	P[i]=j;
+	pos = j;
+	last=i;
+      }else if(h[j] > h[i] && temp[j] == max){
+       
+	if(w[j] > w[pos]){
+	  pos = j;
+	  P[i] = j;
+	  last = i;
+	}
+	
       }
     }
     temp[i] = max + 1;
     if(temp[i] > total){
       total = temp[i];
-      //hago la suma;
-    }else if(temp[i] == total){
-      // aca biene el criterio de desempate
-      // mantengo el maximo entre la suma actual y la que me dio igual
     }
   }
 
   int sum = 0;
-  for(int i = size; i >= 0;){
+  for(int i = last; i >= 0;){
     if(temp[i] == total){
-      //L[total] = h[i];
+      L[total] = h[i];
       sum += w[i];
       i = P[i];
       total--;
     }else
       i--;
   }
-
+  
   return sum;
 }
 
