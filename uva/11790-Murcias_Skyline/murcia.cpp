@@ -57,13 +57,13 @@ int LDS(vector<int>& h, vector<int>& w){  // este metodo esta mal formulado
 	max = temp[j];
 	P[i]=j;
 	pos = j;
-	last=i;
+	//last=i;
       }else if(h[j] > h[i] && temp[j] == max){
        
 	if(w[j] > w[pos]){
 	  pos = j;
 	  P[i] = j;
-	  last = i;
+	  //  last = i;
 	}
 	
       }
@@ -72,6 +72,15 @@ int LDS(vector<int>& h, vector<int>& w){  // este metodo esta mal formulado
     if(temp[i] > total){
       total = temp[i];
     }
+  }
+  int k = size-1;
+  int maxi = std::numeric_limits<int>::max() * - 1;
+  while(temp[k] == total){
+    if(w[k] > maxi){
+      maxi = w[k];
+      last = k;
+    }
+    k--;
   }
 
   int sum = 0;
