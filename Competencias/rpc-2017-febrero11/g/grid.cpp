@@ -1,9 +1,11 @@
 #include <bits/stdc++.h>
+#include <sstream>
+
 using namespace std;
 
 typedef pair<int,int> ii;
 
-const int MAXN = 10;
+const int MAXN = 505;
 
 int dr[] = {-1,1,0,0};
 int dc[] = {0,0,-1,1};
@@ -22,7 +24,7 @@ void seting()
     }
 }
 
-void printMatrix(int m, int n, int (&matrix)[MAXN][MAXN])
+void printMatrix(int m, int n, int (&matrix)[MAXN][MAXN]) // this is for debuggin purposes
 {
   for(int i = 0; i < m; ++i )
     {
@@ -55,11 +57,12 @@ void bfs(int i, int j)
 	  int incrementI = I + (dr[k] * (input[I][J]));
 	  int incrementJ = J + (dc[k] * (input[I][J]));
 	  bool matrixRange = false;
-	  if((incrementI >= 0 && incrementJ >= 0) &&  (incrementI <= MAXN && incrementJ <= MAXN)) matrixRange = true;
-	  //cout << "i: " <<  incrementI << " j: "  <<   incrementJ  << endl;
+	  if((incrementI >= 0 && incrementJ >= 0) &&  (incrementI <= MAXN && incrementJ <= MAXN))
+	    matrixRange = true;
+	  
 	  if(visited[incrementI][incrementJ] == -1 && matrixRange)
 	    {
-	      if(input[incrementI][incrementJ] != -1) // el problema ahora esta en que si llego a una parte donde los cuadros que puedo avanzar son 0, estoy visitando sus vecinos
+	      if(input[incrementI][incrementJ] != -1)
 		{
 		  if(input[incrementI][incrementJ] == 0 ) visited[incrementI][incrementJ] = curr + 1 ;
 		  else
@@ -70,39 +73,35 @@ void bfs(int i, int j)
 		    }
 		}
 	    }
-	}
-
-      //cout << "visiting: " << "i: "  << I  << " j: " << J << endl; 
-      //printMatrix(5,4,visited);
-      
+	}      
     }
 }
 
 
 int main()
 {
-  int m,n;  // recordar que estoy utilizando todo indice 0
+  int m,n,in; 
+  string row;
   cin >> m >> n;
   seting();
 
   for(int i = 0; i < m; ++i)
     {
-      for(int j = 0; j < n; ++j )
+      cin >> row;
+      for(int j = 0; j < row.size(); ++j)
 	{
-	  cin >> input[i][j];
-	}
+	  int temp = row[j] - '0';
+	  input[i][j] = temp;
+	}       	
     }
+
  
+  
   bfs(0,0);
-
+   
   int ans = visited[m-1][n-1];
-  if(ans != -1) cout << ans;
-  else cout << "IMPOSSIBLE";
-
-  // cout << endl;
-  // cout << "visited" << endl;
-  // printMatrix(m,n,visited);
-
+  if(ans != -1) cout << ans << endl;
+  else cout << "IMPOSSIBLE" << endl;
  
 }
 
