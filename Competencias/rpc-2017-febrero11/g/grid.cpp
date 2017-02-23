@@ -54,19 +54,26 @@ void bfs(int i, int j)
 	{
 	  int incrementI = I + (dr[k] * (input[I][J]));
 	  int incrementJ = J + (dc[k] * (input[I][J]));
-
+	  bool matrixRange = false;
+	  if((incrementI >= 0 && incrementJ >= 0) &&  (incrementI <= MAXN && incrementJ <= MAXN)) matrixRange = true;
 	  //cout << "i: " <<  incrementI << " j: "  <<   incrementJ  << endl;
-	  if(visited[incrementI][incrementJ] == -1)
+	  if(visited[incrementI][incrementJ] == -1 && matrixRange)
 	    {
-	      if(input[incrementI][incrementJ] > 0 && ( (incrementI >= 0 && incrementJ >= 0) && (incrementI <= MAXN && incrementJ <= MAXN) )) //el problema esta en que me esa dando posciciones de memoria al azar mayores que 0;
+	      if(input[incrementI][incrementJ] != -1) // el problema ahora esta en que si llego a una parte donde los cuadros que puedo avanzar son 0, estoy visitando sus vecinos
 		{
-		  visited[incrementI][incrementJ] = curr + input[I][J] ;
-		  ii temp = make_pair(incrementI,incrementJ);
-		  q.push(temp);
+		  if(input[incrementI][incrementJ] == 0 ) visited[incrementI][incrementJ] = curr + 1 ;
+		  else
+		    {
+		      visited[incrementI][incrementJ] = curr + 1;
+		      ii temp = make_pair(incrementI,incrementJ);
+		      q.push(temp);
+		    }
 		}
 	    }
-	  
 	}
+
+      //cout << "visiting: " << "i: "  << I  << " j: " << J << endl; 
+      //printMatrix(5,4,visited);
       
     }
 }
@@ -92,9 +99,9 @@ int main()
   if(ans != -1) cout << ans;
   else cout << "IMPOSSIBLE";
 
-  cout << endl;
-  cout << "visited" << endl;
-  printMatrix(m,n,visited);
+  // cout << endl;
+  // cout << "visited" << endl;
+  // printMatrix(m,n,visited);
 
  
 }
