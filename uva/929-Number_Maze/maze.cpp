@@ -4,7 +4,7 @@ using namespace std;
 
 #define INF  1000000000
 
-const int MAXN = 2000; // cambiar para enviar al juez;
+const int MAXN = 2000;
 typedef pair<int,int> ii;
 typedef pair<int,ii > ipii;
 
@@ -54,7 +54,7 @@ void clean()
 
 bool isInRange(int i, int j)
 {
-  if((i >= 0 && j >= 0) && (i < MAXN && j < MAXN)) // estrictamente menor?? 
+  if((i >= 0 && j >= 0) && (i < MAXN && j < MAXN)) 
     if(maze[i][j] != -1) return true;
   return false;
 }
