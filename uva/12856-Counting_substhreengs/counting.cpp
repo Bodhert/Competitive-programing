@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int MAXN = 1000005;  // cambiar despues  al verdadero m
+const int MAXN = 1000005;  
 int memo[3] , mods[MAXN];
 typedef unsigned long long ll;
 
