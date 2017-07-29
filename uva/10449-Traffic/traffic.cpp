@@ -39,7 +39,7 @@ void clean()
 int main()
 {
 
-    //freopen("in", "r", stdin); // debug purposes
+    freopen("in", "r", stdin); // debug purposes
     int juntions, roads, busynessNum, juntion1,juntion2 , queries, querie, set = 1;
     while(cin >> juntions)
     {
@@ -56,7 +56,8 @@ int main()
         {
             cin >> juntion1 >> juntion2;
             juntion1--; juntion2--;
-            graph[juntion1].push_back(ii(juntion2,busyness[juntion1]));
+            int distance = pow(busyness[juntion2] - busyness[juntion1],3);
+            graph[juntion1].push_back(ii(juntion2,distance));
         }
 
         bellmanFord(juntions , 0);
@@ -72,7 +73,7 @@ int main()
             querie--;
             if(dist[querie] != INF)
             {
-                int earn = busyness[querie] - busyness[0];
+                int earn = pow(busyness[querie] - busyness[0],3);
                 earn < 3 ? cout << "?" << endl : cout << earn << endl;
             }
         }
