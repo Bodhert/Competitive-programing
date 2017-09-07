@@ -9,27 +9,8 @@ const int INF = 1000000000;
 vector<ii> graph[MAXN];
 int dist[MAXN];
 int busyness[MAXN];
-
-bool negative[MAXN];
-bool negativePath[MAXN];
-
-void bfs(int source) //finding the paths with negative cicle
-{
-    queue<int> q; q.push(source);
-    while(!q.empty())
-    {
-        int cur = q.front(); q.pop();
-        for(int i = 0; i < graph[cur].size(); ++i)
-        {
-            int next = graph[cur][i].first;
-            if(negativePath[next] == 0)
-            {
-                negativePath[next] = 1;
-                q.push(next);
-            }
-        }
-    }
-}
+int negative[MAXN];
+int negativePath[MAXN];
 
 void ModifiedbellmanFord(int nodes, int source)
 {
@@ -41,22 +22,22 @@ void ModifiedbellmanFord(int nodes, int source)
             for(int j = 0; j < graph[u].size(); ++j )
             {
                 int curNode = graph[u][j].first;
-                int distance = graph[u][j].second;                
+                int distance = graph[u][j].second; 
                 dist[curNode] = min(dist[curNode], dist[u] + distance );
             }
         }
     }
 
-    for(int u =  0; u < nodes; ++u)
-        {
-            for(int j = 0; j < graph[u].size(); ++j )
-            {
-                int curNode = graph[u][j].first;
-                int distance = graph[u][j].second;                
-                if(dist[curNode] > dist[u] + distance) negative[curNode] = 1;
-            }
-        }
 
+      bool hasNegativeCycle = false;
+  for (int u = 0; u < nodes; u++)                          // one more pass to check
+    for (int j = 0; j < (int)graph[u].size(); j++) {
+      ii v = graph[u][j];
+      if (dist[v.first] > dist[u] + v.second)                 // should be false
+        hasNegativeCycle = true;     // but if true, then negative cycle exists!
+    }
+    
+  printf("Negative Cycle Exist? %s\n", hasNegativeCycle ? "Yes" : "No");
 }
 
 void clean()
@@ -74,19 +55,15 @@ void clean()
 int main()
 {
 
-    freopen("in", "r", stdin); // debug purposes
-    string in1;
+    //freopen("in", "r", stdin); // debug purposes
     int juntions, roads, busynessNum, juntion1,juntion2 , queries, querie, set = 1;
 
-    while( getline(cin, in1));
+    while(cin >> juntions)
     {
-        cout <<  in1 << endl;
-        stringstream ss(in1);
-        ss >> juntions;
-        clean();
+        clean();        
         for(int i = 0 ; i < juntions; ++i)
         {
-            ss >> busynessNum;
+            cin >> busynessNum;
             busyness[i] = busynessNum;
         }
 
@@ -103,14 +80,6 @@ int main()
         ModifiedbellmanFord(juntions , 0);
 
 
-        for(int i = 0; i < juntions; ++i)
-        {
-            if(negative[i] && !negativePath[i])
-            {
-                bfs(i);
-            }
-        }
-
         cin >> queries;
 
         cout << "Set #" << set << endl;
@@ -120,9 +89,11 @@ int main()
         {
             cin >> querie;
             querie--;
-            int earn = pow(busyness[querie] - busyness[0],3);
-            negativePath[querie] || earn < 3 ? cout << "?" << endl : cout << earn << endl;
+            //negativePath[querie] || dist[querie] < 3 || dist[querie] == INF ? 
+            //    cout << "?" << endl : cout << dist[querie] << endl;
+            cout << dist[querie] << endl;
         }
     }
+
     return 0;
 }
