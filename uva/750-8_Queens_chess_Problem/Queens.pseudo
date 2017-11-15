@@ -1,0 +1,28 @@
+
+
+
+
+void backtrack(int col)
+    if No_valid_Position return
+    for i = 0 to 7
+        mem[i] = col 
+        backtrack(col + 1)
+    end for
+end backtrack
+
+
+
+
+function main()
+    Read Datasets
+    for i=0 to Datasets
+        Read row, col  //position on the first queen
+        row--; col -- // change to 0 indexing
+        mem[row] = col // representing only the posisiton where the queen is 
+                        // example 
+                        // 1 2 3 4 row
+                        // 1 0 0 0 column
+        backtrack(0) // generates al the posibble permutation cutting obvious choises
+                    // like the diagonal and row and column 
+    end for 
+end main
