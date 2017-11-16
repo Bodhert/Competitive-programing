@@ -1,14 +1,23 @@
 
 
+bool Valid_position(int col)
+    for prev = 0 to 7
+        if(mem[prev] == col || prev == col || (abs(prev-col) == abs(mem[prev]-col)))  // is in the same row or col or in his diagonal
+            return false;
+        end if
+    end for
+    else return true;
+end 
 
-
-void backtrack(int col)
+void backtrack(int col)  // put a queen in a corret spot recurse until have 8 queens placed
     if No_valid_Position return
     for i = 0 to 7
-        mem[i] = col 
-        backtrack(col + 1)
+        if Valid_position(i) 
+            mem[i] = col 
+        end if
     end for
-end backtrack
+    backtrack(col + 1)
+end 
 
 
 
@@ -25,4 +34,8 @@ function main()
         backtrack(0) // generates al the posibble permutation cutting obvious choises
                     // like the diagonal and row and column 
     end for 
-end main
+end
+
+
+// idea, place one , and check if all the array passes the check , if does , save 
+// that configuration.
