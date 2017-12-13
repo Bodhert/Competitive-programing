@@ -14,6 +14,10 @@ los escribe en un archivo  out.out
                          //includes necesarios
 #define D(x) cout << "DEBUG: " << #x "=" << x << endl; 
 using namespace std;
+typedef pair<int, int> ii;
+typedef vector<ii> vii;
+typedef vector<int> vi;
+
 
 int main()
 {    	   
