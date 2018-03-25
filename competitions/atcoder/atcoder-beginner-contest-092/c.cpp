@@ -4,7 +4,7 @@ using namespace std;
 const int MAXN = 1000005; //1000005; change
 int xAxis[MAXN];
 int diffs[MAXN];
-vector<int> trip;
+
 
 int main()
 {
