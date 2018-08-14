@@ -3,22 +3,25 @@ using namespace std;
 
 #define D(x) cout << "DEBUG: " << #x " = " << x << endl
 
+const int MAXN = 50; // max level of anidation
+int currIndex = 0;
+int nextIndex = 1;
+
 struct Tag
 {
     string name = "";
-    struct Tag* previous = NULL;
     map<string,string> atributes;
-    map<string,Tag> branches;
-    Tag(string _name,struct Tag* _previous) : name(_name), previous(_previous) {}
+    Tag(string _name) : name(_name){}
 };
 
-map<string,Tag*> trees;
+
+vector<Tag> Tree[MAXN];
 string currTag = "";
-struct Tag* current = NULL;
 
 void parseAndStore(string toParse)
 {
     string instruction;
+    struct Tag* current = (struct Tag*)malloc(sizeof(struct Tag));
     toParse = toParse.substr(1, toParse.size() - 2);
     D(toParse);
     istringstream iss(toParse);
@@ -28,32 +31,21 @@ void parseAndStore(string toParse)
 
     if(instruction[0] != '/')
     {
-        if(currTag == "")
-        {
-            currTag = instruction;
-            current = (struct Tag*)malloc(sizeof(struct Tag));
-            current->name =  instruction;
-            //asignar los atributos
-        }
-        else
-        {
-            currTag = instruction;
-            struct Tag* branch = (struct Tag*)malloc(sizeof(struct Tag));
-            branch->name = currTag;
-            branch->previous = current;
-            current->branches[currTag] = branch; // bug here in the insertion
-            current = branch;
-        }
+        currTag = instruction;
+    }
+    else
+        currTag = instruction.substr(1,instruction.size()-1);
+
+
+    if(instruction[0] != '/')
+    {
+        Tree[currIndex].push_back(Tag(currTag));
+        currIndex = nextIndex;
+        nextIndex++;
     }
     else
     {
-        string closingTag = instruction.substr(1,instruction.size()-1);
-
-        if(currTag == closingTag && current->previous != NULL)
-        {
-            current = current->previous;
-            currTag = current->name;
-        }
+        currIndex--;
     }
 }
 
