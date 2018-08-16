@@ -59,7 +59,7 @@ string search(Tag *curr, string line)
 
 int main()
 {
-    freopen("in3", "r", stdin); // for debug purposes
+    // freopen("in3", "r", stdin); // for debug purposes
 
     int lines, queries;
     string in;
