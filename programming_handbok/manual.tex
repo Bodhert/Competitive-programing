@@ -407,14 +407,27 @@ Complejidad: $O(n)$ donde $n$ es el tamaño del string.
 	\subsection{sufix /trie/array}
 	Estructura de datos que maneja eficientemente strings, y operaciones sobre la misma
 	se tratara las siguientes implementaciones implementaciones  \textit{suffix trie} y \textit{suffix array} 
-	\hl{separar el codigo en lo que hace cada metodo por a parte}\\
 	
 	\subsubsection{suffix trie}
-	\source{./src/sufixTrie.cpp}
+	\source{./src/sufix-Array-Trie/sufixTrie.cpp}
 	
 	\subsubsection{suffix array}
 	la construccion del sufix array es compleja de entender , se recomienda, aprender mas a manejar esta estructura, que entender las optimizaciones que tiene 
-	\source{./src/sufixArray.cpp}
+	\source{./src/sufix-Array-Trie/sufixArray.cpp}
+	
+	\subsubsection{String Matching}
+	Despues de haber construido el sufix array de $T$ podemos buscar un patrón $P$ en $O(mlogn)$
+	\source{./src/sufix-Array-Trie/SufixArrayStringMatching.cpp}
+	
+	\subsubsection{Longest Common Prefix (LCP)}
+	Se puede hallar el LCP entre sufijos consecutivos en $O(n)$
+	\source{./src/sufix-Array-Trie/SufixArrayLCP.cpp}
+	
+	\subsubsection{Longest Repeated Substring}
+		\source{./src/sufix-Array-Trie/SufixArrayLRS.cpp}
+		
+		
+	
 		
   \subsection{Formatos de impresión}
     \subsubsection{Números}
