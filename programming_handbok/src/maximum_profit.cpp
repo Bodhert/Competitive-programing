@@ -8,8 +8,10 @@ int maxProfit(int k, const vector<int> &prices) {
     dp[i % 2][0] = 0;
     int max_diff = -prices[1 - (i % 2)];
     for (int j = 1; j < n; ++j) {
-      max_diff = max(max_diff, dp[1 - (i % 2)][j - 1] - prices[j - 1]);
-      dp[i % 2][j] = max(dp[i % 2][j - 1], max_diff + prices[j]);
+      max_diff = 
+       max(max_diff, dp[1 - (i % 2)][j - 1] - prices[j - 1]);
+      dp[i % 2][j] = 
+       max(dp[i % 2][j - 1], max_diff + prices[j]);
     }
   }
   return dp[k % 2][n - 1];
