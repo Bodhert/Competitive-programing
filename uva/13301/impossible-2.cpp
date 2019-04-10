@@ -49,7 +49,7 @@ int kosaraju(int n)
     reverse(toposort.begin(), toposort.end());
 
     int comp = 0;
-    for (int i = 0; i < n; ++i)
+    for (int i = 0; i < n && comp <= 1; ++i)
     {
         int u = toposort[i];
         if (scc[u] == -1)
