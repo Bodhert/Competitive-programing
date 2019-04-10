@@ -70,7 +70,7 @@ int kosaraju(int n)
     reverse(toposort.begin(), toposort.end());
 
     int comp = 0;
-    for (int i = 0; i < toposort.size(); ++i)
+    for (int i = 0; i < toposort.size() && comp <=1; ++i)
     {
         int u = toposort[i];
         if (scc[u] == -1)
@@ -97,6 +97,8 @@ void initialize(int nodes)
 int main()
 {
     //freopen("in", "r", stdin); // for debug purposes
+    std::ios::sync_with_stdio(false);
+    cin.tie(NULL);
     int nodes, edges, procedures, u, v;
     while (cin >> nodes >> edges)
     {
