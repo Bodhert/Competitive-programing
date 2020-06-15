@@ -224,11 +224,13 @@ Entonces la solución sería, utilizando $MaxFlow$:\\
   Para hallar el mínimo común múltiplo: \quad $ \displaystyle\operatorname{lcm}(a, b) = \frac{|a \cdot b|}{\operatorname{gcd}(a,b)}$
 
   \subsection{Criba de Eratóstenes}
-  Encuentra los primos desde 1 hasta un límite $n$.\\
-  \verb|sieve[i]| es falso sí y solo sí i es un número primo.\\
-  Complejidad: $O(n)$ donde $n$ es el límite superior.\\
-  \source{./src/sieve.cpp}
-
+  Encuentra los primos desde 1 hasta un límite $n$. \verb|sieve[i]| es falso sí y solo sí i es un número primo.\\
+  Complejidad: muy próxima a $O(n)$ donde $n$ es el límite superior, pero en realidad la complejidad es $O(n loglogn)$.\\
+  \source{./src/sieve.cpp}\\
+  Version optimizada  \source{./src/sieve_optimized.cpp}\\
+  Version en python: como python trabaja sobre referencias, y la idea es no tener que lidiar mucho que la palabra $global$, lo ideal es retornar la referencia, ademas $MAXN$ se puede parámetrizar (pasar por argumento) si se desea
+  \source{./src/sieve.py}
+  
   \subsection{Factorización prima de un número}
   Halla la factorización prima de un número $a$ positivo. Si $a$ es negativo llamar el algoritmo con $|a|$ y agregarle -1 a la factorización.\\
   Se asume que ya se ha ejecutado el algoritmo para generar los primos hasta al menos $\sqrt{a}$.\\
