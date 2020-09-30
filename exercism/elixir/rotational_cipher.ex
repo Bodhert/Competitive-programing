@@ -14,7 +14,7 @@ defmodule RotationalCipher do
     |> to_string()
   end
 
-  @spec validation(char:: char(), shift :: integer)
+  @spec validation(char:: char(), shift :: integer) :: char()
   def validation(char,shift) do
     cond do
       char >= ?a  and char <= ?z -> ?a + rem(char - ?a + shift, 26)
