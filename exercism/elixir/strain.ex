@@ -18,17 +18,6 @@ defmodule Strain do
     end
   end
 
-  def reject([], _fucntion) do
-    []
-  end
-
-  def reject([head | tail], function) do
-    cond do
-      !function.(head) -> [head | reject(tail, function)]
-      true -> reject(tail, function)
-    end
-  end
-
   @spec keep(list :: list(any), fun :: (any -> boolean)) :: list(any)
   def keep(list, fun) do
     filter(list, fun)
@@ -42,6 +31,6 @@ defmodule Strain do
   """
   @spec discard(list :: list(any), fun :: (any -> boolean)) :: list(any)
   def discard(list, fun) do
-    reject(list,fun)
+    filter(list,&(fun.(&1)))
   end
 end
