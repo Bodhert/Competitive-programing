@@ -31,6 +31,6 @@ defmodule Strain do
   """
   @spec discard(list :: list(any), fun :: (any -> boolean)) :: list(any)
   def discard(list, fun) do
-    filter(list,&(fun.(&1)))
+    filter(list,fn a -> !fun.(a) end)
   end
 end
