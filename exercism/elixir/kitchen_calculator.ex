@@ -8,7 +8,7 @@ defmodule KitchenCalculator do
   @teaspoon_conversion 5
   @tablespoon_conversion 15
 
-  @spec! get_volume({atom, number}) :: number
+  @spec! get_volume({units(), number}) :: number
   def get_volume({_unit, number}), do: number
 
   @spec! to_milliliter(kitchen_units()) :: {:milliliter, number}
